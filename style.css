@@ -52,3 +52,7 @@ h1{
 .hint5:hover:before{
 	content: "I'm cube shaped";
 }
+img{
+  	width: 100%;
+  	height: auto;
+}
