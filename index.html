@@ -30,7 +30,6 @@
 		nxt = e => {
 			x = parseInt(e+1);
 			const answer = document.getElementById("answer"+x).value;
-			document.getElementById("points").innerHTML = "Points: " + point;
 			root[e].style.display = "none";
 			if(e!=4)
 			root[e+1].style.display = "block";
@@ -41,6 +40,7 @@
 				point++;
 				a = document.getElementsByClassName("answers");
 				a[e].style.color = "green";
+				document.getElementById("points").innerHTML = "Points: " + point;
 			}
 			else {
 				life--;
