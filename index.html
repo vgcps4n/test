@@ -1,8 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>About me</title>
+	<title>Lab 9</title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<script type="text/javascript">
+		var life = 3;
+		var time = 120000;
+		var point = 0;
+		//timer
+		var x = setInterval(() => {
+			var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+	  		var seconds = Math.floor((time % (1000 * 60)) / 1000);
+			document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+			if(time < 0){
+				clearInterval(x);
+				document.getElementById("timer").innerHTML = "Time's Up!";
+				for(var i=0; i<5; i++)
+					root[i].style.display = "none";
+				document.getElementById("points").innerHTML = "Points: " + point;
+				root[5].style.display = "block";
+				root[6].style.display = "block";
+			}
+			time-=1000;
+		}, 1000);
+
+		const answers = ["watermelon", "keyboard", "code", "nothing", "die"];
+		const root = document.getElementsByTagName("article");
+		//on submit
+		nxt = e => {
+			x = parseInt(e+1);
+			const answer = document.getElementById("answer"+x).value;
+			document.getElementById("points").innerHTML = "Points: " + point;
+			root[e].style.display = "none";
+			if(e!=4)
+			root[e+1].style.display = "block";
+			if(e==4)
+				root[e+2].style.display = "block";
+			//checking answer
+			if(answer.toLowerCase() == answers[e]) {
+				point++;
+				a = document.getElementsByClassName("answers");
+				a[e].style.color = "green";
+			}
+			else {
+				life--;
+				document.getElementById("life").innerHTML = "Life: " + life;
+			}
+			//if you die:
+			if(life == 0){
+				for(var i=0; i<5; i++)
+					root[i].style.display = "none";
+				document.getElementById("points").innerHTML = "Points: " + point;
+				root[5].style.display = "block";
+				root[6].style.display = "block";
+			}
+		}
+	</script>
 </head>
 <body background="https://i.imgur.com/kRebuEP.png">
+	<main>
+		<section id="life">Life: 3</section>
+		<section id="timer"></section>
+		<article id="start">
+			<h1>Green House</h1>
+			<div class="content">
+				There was a green house.<br>Inside the green house there was a white house.<br>Inside the white house there was a red house.<br>Inside the red house there were lots of babies.<br><br>What is it?
+			</div>
+			<input type="text" name="answer1" id="answer1" />
+			<button type="submit" onclick="nxt(0);">submit</button>
+			<div class="hint1" id="hint"><span>Hint.</span></div>
+		</article>
+
+		<article>
+			<h1>Keys Without Locks</h1>
+			<div class="content">
+				I have keys without key locks.<br>I have space without rooms.<br>You can enter but you cannot go outside.<br><br>What am I?<br><br>
+			</div>
+			<input type="text" name="answer2" id="answer2" />
+			<button type="submit" onclick="nxt(1);">submit</button>
+			<div class="hint2" id="hint"><span>Hint.</span></div>
+		</article>
+
+		<article>
+			<h1>Bugged</h1>
+			<div class="content">
+				Sometimes I work, mostly I don't.<br>Not because I'm lazy, just because you're wrong.<br>Fix me if you can!<br>You may find the solution<br>only in your dream.<br><br>What am I?<br><br>
+			</div>
+			<input type="text" name="answer3" id="answer3" />
+			<button type="submit" onclick="nxt(2);">submit</button>
+			<div class="hint3" id="hint"><span>Hint.</span></div>
+		</article>
+
+		<article>
+			<h1>Something</h1>
+			<div class="content">
+				Poor has it.<br>Rich doesn't.<br>If you eat it, you will die!<br><br>
+			</div>
+			<input type="text" name="answer4" id="answer4" />
+			<button type="submit" onclick="nxt(3);">submit</button>
+			<div class="hint4" id="hint"><span>Hint.</span></div>
+		</article>
+
+		<article>
+			<h1>Six Faces</h1>
+			<div class="content">
+				I have six faces and twenty-one eyes<br>yet I can not see.<br><br>What am I?<br><br>
+			</div>
+			<input type="text" name="answer5" id="answer5" />
+			<button type="submit" onclick="nxt(4);">submit</button>
+			<div class="hint5" id="hint"><span>Hint.</span></div>
+		</article>
+
+		<article  id="death">
+			<h1>You are dead.</h1>
+		</article>
+		<article>
+			<div id="score">
+			<div id="points"></div>
+				<h1>Answers</h1>
+				<div class="answers">1. Watermelon</div>
+				<div class="answers">2. Keyboard</div>
+				<div class="answers">3. Code</div>
+				<div class="answers">4. Nothing</div>
+				<div class="answers">5. Die</div>
+			</div>
+		</article>
+	</main>
 </body>
 </html>
